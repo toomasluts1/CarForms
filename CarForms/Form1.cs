@@ -108,6 +108,9 @@ namespace CarForms
             Insert(new Car("mark3", "maker3", "type3", 3, "date3"));
             Insert(new Car("mark4", "maker4", "type4", 4, "date4"));
             Insert(new Car("mark5", "maker5", "type5", 5, "date5"));
+            Insert(new Car("Ford", "Drof", "EcoSport", 1998, "07.08.2002"));
+            Insert(new Car("Ford", "Frod", "Fiesta", 2002, "23.11.2006"));
+            Insert(new Car("Ford", "Rofd", "Kuga", 2005, "18.02.2007"));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,6 +149,14 @@ namespace CarForms
                     xmlser.Serialize(writer, listCars);
                 }
             }
+        }
+
+        private void listToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form4 listForm = new Form4();
+            listForm.carsForm = this;
+            listForm.Show();
         }
     }
 }
