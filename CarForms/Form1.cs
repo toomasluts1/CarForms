@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace CarForms
 {
@@ -96,7 +98,7 @@ namespace CarForms
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             carBindingSource.Clear();
-            carBindingSource.DataSource = listCars;
+            //carBindingSource.DataSource = listCars;
         }
 
         private void demoDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,6 +108,44 @@ namespace CarForms
             Insert(new Car("mark3", "maker3", "type3", 3, "date3"));
             Insert(new Car("mark4", "maker4", "type4", 4, "date4"));
             Insert(new Car("mark5", "maker5", "type5", 5, "date5"));
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Andmefail|*.xml";
+            openFileDialog1.Title = "Vali andmefail avamiseks";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (var reader = new StreamReader(openFileDialog1.FileName))
+                {
+                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                    listCars = (List<Car>)xmlser.Deserialize(reader);
+                    carBindingSource.DataSource = listCars;
+                }
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog saveFileDialog1 = new OpenFileDialog();
+            saveFileDialog1.Filter = "Anmefail|*.xml";
+            saveFileDialog1.Title = "Vali andmefail salvestamiseks";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (FileStream writer = new FileStream(saveFileDialog1.FileName, FileMode.Create))
+                {
+                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                    xmlser.Serialize(writer, listCars);
+                }
+            }
         }
     }
 }
