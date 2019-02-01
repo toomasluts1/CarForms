@@ -35,6 +35,18 @@ namespace CarForms
             carBindingSource.MoveLast();
         }
 
+        public string getCarMark() { return tbCarMark.Text; }
+        public string getMaker() { return tbMaker.Text; }
+        public string getType() { return tbType.Text; }
+        public string getReleaseYear() { return tbReleaseYear.Text; }
+        public string getRegistrationDate() { return tbRegistrationDate.Text; }
+
+        public void setCarMark(string x) {  tbCarMark.Text = x; }
+        public void setMaker(string x) {  tbMaker.Text = x; }
+        public void setType(string x) {  tbType.Text = x; }
+        public void setReleaseYear(string x) {  tbReleaseYear.Text = x; }
+        public void setRegistrationDate(string x) {  tbRegistrationDate.Text = x; }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -66,6 +78,34 @@ namespace CarForms
             Form2 addForm = new Form2();
             addForm.carsForm = this;
             addForm.Show();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form3 editForm = new Form3();
+            editForm.carsForm = this;
+            editForm.Show();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            carBindingSource.RemoveCurrent();
+        }
+
+        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            carBindingSource.Clear();
+            carBindingSource.DataSource = listCars;
+        }
+
+        private void demoDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Insert(new Car("mark1", "maker1", "type1", 1, "date1"));
+            Insert(new Car("mark2", "maker2", "type2", 2, "date2"));
+            Insert(new Car("mark3", "maker3", "type3", 3, "date3"));
+            Insert(new Car("mark4", "maker4", "type4", 4, "date4"));
+            Insert(new Car("mark5", "maker5", "type5", 5, "date5"));
         }
     }
 }
