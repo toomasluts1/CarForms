@@ -9,3 +9,4 @@ C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.csproj.CoreCo
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.exe
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.pdb
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.Form3.resources
+C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.csprojAssemblyReference.cache

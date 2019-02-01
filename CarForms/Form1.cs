@@ -134,8 +134,8 @@ namespace CarForms
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog saveFileDialog1 = new OpenFileDialog();
-            saveFileDialog1.Filter = "Anmefail|*.xml";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Andmefail|*.xml";
             saveFileDialog1.Title = "Vali andmefail salvestamiseks";
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)

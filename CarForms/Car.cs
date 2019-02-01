@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarForms
 {
+    [Serializable]
     public class Car
     {
         private string carMark;
@@ -14,6 +15,7 @@ namespace CarForms
         private short releaseYear;
         private string registrationDate;
 
+        public Car() { }
         public Car(string carMark, string maker, string type, short releaseYear, string registrationDate)
         {
             this.carMark = carMark;
