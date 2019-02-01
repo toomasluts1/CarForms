@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarForms
 {
-    class Car
+    public class Car
     {
         private string carMark;
         private string maker;

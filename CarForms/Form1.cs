@@ -20,7 +20,7 @@ namespace CarForms
             carBindingSource.DataSource = typeof(Car);
         }
 
-        private void Insert(Car c)
+        public void Insert(Car c)
         {
             if (listCars.Count == 0)
             {
@@ -28,6 +28,11 @@ namespace CarForms
                 carBindingSource.DataSource = listCars;
             }
             else listCars.Add(c);
+        }
+
+        public void MoveLast()
+        {
+            carBindingSource.MoveLast();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -59,6 +64,7 @@ namespace CarForms
         {
             this.Hide();
             Form2 addForm = new Form2();
+            addForm.carsForm = this;
             addForm.Show();
         }
     }

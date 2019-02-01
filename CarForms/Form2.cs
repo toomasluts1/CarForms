@@ -12,6 +12,8 @@ namespace CarForms
 {
     public partial class Form2 : Form
     {
+        public Form1 carsForm;
+
         public Form2()
         {
             InitializeComponent();
@@ -20,12 +22,16 @@ namespace CarForms
         private void btnOk_Click(object sender, EventArgs e)
         {
             Car c = new Car(tbCarMark.Text, tbMaker.Text, tbType.Text, short.Parse(tbReleaseYear.Text), tbRegistrationDate.Text);
-
+            carsForm.Insert(c);
+            carsForm.MoveLast();
+            this.Close();
+            carsForm.Show();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+            carsForm.Show();
         }
     }
 }
