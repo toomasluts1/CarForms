@@ -32,6 +32,7 @@ namespace CarForms
                 saveXml(f);
             }
             currentFile = f;
+
         }
 
         public void Insert(Car c)
@@ -44,6 +45,7 @@ namespace CarForms
             else listCars.Add(c);
         }
 
+        //public MoveLast method for adding a car from an other form
         public void MoveLast()
         {
             carBindingSource.MoveLast();
@@ -87,19 +89,21 @@ namespace CarForms
             carBindingSource.MoveLast();
         }
 
+        //Form for adding a car
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form2 addForm = new Form2();
-            addForm.carsForm = this;
+            addForm.carsForm = this; //Make this form accessible from the new form
             addForm.Show();
         }
 
+        //Form for editing a car's data
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form3 editForm = new Form3();
-            editForm.carsForm = this;
+            editForm.carsForm = this; //Make this form accessible from the new form
             editForm.Show();
         }
 
@@ -163,6 +167,8 @@ namespace CarForms
             //listForm.Show();
         }
 
+        //Method to apply changes from another form after editing
+        public void apply() { carBindingSource.EndEdit(); }
 
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
         {

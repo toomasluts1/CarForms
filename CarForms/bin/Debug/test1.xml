@@ -2,8 +2,8 @@
 <ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Car>
     <CarMark>asd</CarMark>
-    <Maker>asdvsa</Maker>
-    <Type>dfgfdg</Type>
+    <Maker>sadfsdf</Maker>
+    <Type>type1</Type>
     <ReleaseYear>1</ReleaseYear>
     <RegistrationDate>date1</RegistrationDate>
   </Car>

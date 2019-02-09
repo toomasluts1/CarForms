@@ -41,6 +41,7 @@ namespace CarForms
             carsForm.setType(tbType.Text);
             carsForm.setReleaseYear(tbReleaseYear.Text);
             carsForm.setRegistrationDate(tbRegistrationDate.Text);
+            carsForm.apply();
 
             this.Close();
             carsForm.Show();
