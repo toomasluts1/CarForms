@@ -11,3 +11,15 @@ C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.pdb
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.Form3.resources
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.csprojAssemblyReference.cache
 C:\Users\opilane\source\repos\CarForms\CarForms\obj\Debug\CarForms.Form4.resources
+D:\Documents\GitHub\CarForms\CarForms\bin\Debug\CarForms.exe.config
+D:\Documents\GitHub\CarForms\CarForms\bin\Debug\CarForms.exe
+D:\Documents\GitHub\CarForms\CarForms\bin\Debug\CarForms.pdb
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.Form1.resources
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.Form2.resources
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.Form3.resources
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.Properties.Resources.resources
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csproj.GenerateResource.cache
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.exe
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.pdb
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csprojAssemblyReference.cache

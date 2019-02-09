@@ -15,11 +15,32 @@ namespace CarForms
     public partial class Form1 : Form
     {
         List<Car> listCars = new List<Car>();
+        string currentFile;
 
         public Form1()
         {
             InitializeComponent();
             carBindingSource.DataSource = typeof(Car);
+
+            string f = "default.xml";
+            try
+            {
+                using (var reader = new StreamReader(f))
+                {
+                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                    listCars = (List<Car>)xmlser.Deserialize(reader);
+                    carBindingSource.DataSource = listCars;
+                }
+            }
+            catch(FileNotFoundException e)
+            {
+                using (FileStream writer = new FileStream(f, FileMode.Create))
+                {
+                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                    xmlser.Serialize(writer, listCars);
+                }
+            }
+            currentFile = f;
         }
 
         public void Insert(Car c)
@@ -37,6 +58,7 @@ namespace CarForms
             carBindingSource.MoveLast();
         }
 
+        //Getters and setters for interacting with other forms
         public string getCarMark() { return tbCarMark.Text; }
         public string getMaker() { return tbMaker.Text; }
         public string getType() { return tbType.Text; }
@@ -153,10 +175,20 @@ namespace CarForms
 
         private void listToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form4 listForm = new Form4();
-            listForm.carsForm = this;
-            listForm.Show();
+            //this.Hide();
+            //Form4 listForm = new Form4();
+            //listForm.carsForm = this;
+            //listForm.Show();
+        }
+
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (FileStream writer = new FileStream(currentFile, FileMode.Create))
+            {
+                XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                xmlser.Serialize(writer, listCars);
+            }
         }
     }
 }
