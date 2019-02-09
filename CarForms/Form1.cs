@@ -15,11 +15,23 @@ namespace CarForms
     public partial class Form1 : Form
     {
         List<Car> listCars = new List<Car>();
+        string currentFile;
 
         public Form1()
         {
             InitializeComponent();
             carBindingSource.DataSource = typeof(Car);
+
+            string f = "default.xml";
+            try
+            {
+                openXml(f);
+            }
+            catch(FileNotFoundException e)
+            {
+                saveXml(f);
+            }
+            currentFile = f;
         }
 
         public void Insert(Car c)
@@ -37,6 +49,7 @@ namespace CarForms
             carBindingSource.MoveLast();
         }
 
+        //Getters and setters for interacting with other forms
         public string getCarMark() { return tbCarMark.Text; }
         public string getMaker() { return tbMaker.Text; }
         public string getType() { return tbType.Text; }
@@ -126,12 +139,7 @@ namespace CarForms
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                using (var reader = new StreamReader(openFileDialog1.FileName))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    listCars = (List<Car>)xmlser.Deserialize(reader);
-                    carBindingSource.DataSource = listCars;
-                }
+                openXml(openFileDialog1.FileName);
             }
         }
 
@@ -143,20 +151,41 @@ namespace CarForms
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                using (FileStream writer = new FileStream(saveFileDialog1.FileName, FileMode.Create))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    xmlser.Serialize(writer, listCars);
-                }
+                saveXml(saveFileDialog1.FileName);
             }
         }
 
         private void listToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form4 listForm = new Form4();
-            listForm.carsForm = this;
-            listForm.Show();
+            //this.Hide();
+            //Form4 listForm = new Form4();
+            //listForm.carsForm = this;
+            //listForm.Show();
+        }
+
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            saveXml(currentFile);
+        }
+
+        private void openXml(string fileName)
+        {
+            using (var reader = new StreamReader(fileName))
+            {
+                XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                listCars = (List<Car>)xmlser.Deserialize(reader);
+                carBindingSource.DataSource = listCars;
+            }
+        }
+
+        private void saveXml(string fileName)
+        {
+            using (FileStream writer = new FileStream(fileName, FileMode.Create))
+            {
+                XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                xmlser.Serialize(writer, listCars);
+            }
         }
     }
 }
