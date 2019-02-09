@@ -25,20 +25,11 @@ namespace CarForms
             string f = "default.xml";
             try
             {
-                using (var reader = new StreamReader(f))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    listCars = (List<Car>)xmlser.Deserialize(reader);
-                    carBindingSource.DataSource = listCars;
-                }
+                openXml(f);
             }
             catch(FileNotFoundException e)
             {
-                using (FileStream writer = new FileStream(f, FileMode.Create))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    xmlser.Serialize(writer, listCars);
-                }
+                saveXml(f);
             }
             currentFile = f;
         }
@@ -148,12 +139,7 @@ namespace CarForms
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                using (var reader = new StreamReader(openFileDialog1.FileName))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    listCars = (List<Car>)xmlser.Deserialize(reader);
-                    carBindingSource.DataSource = listCars;
-                }
+                openXml(openFileDialog1.FileName);
             }
         }
 
@@ -165,11 +151,7 @@ namespace CarForms
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                using (FileStream writer = new FileStream(saveFileDialog1.FileName, FileMode.Create))
-                {
-                    XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
-                    xmlser.Serialize(writer, listCars);
-                }
+                saveXml(saveFileDialog1.FileName);
             }
         }
 
@@ -184,7 +166,22 @@ namespace CarForms
 
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (FileStream writer = new FileStream(currentFile, FileMode.Create))
+            saveXml(currentFile);
+        }
+
+        private void openXml(string fileName)
+        {
+            using (var reader = new StreamReader(fileName))
+            {
+                XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
+                listCars = (List<Car>)xmlser.Deserialize(reader);
+                carBindingSource.DataSource = listCars;
+            }
+        }
+
+        private void saveXml(string fileName)
+        {
+            using (FileStream writer = new FileStream(fileName, FileMode.Create))
             {
                 XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
                 xmlser.Serialize(writer, listCars);
