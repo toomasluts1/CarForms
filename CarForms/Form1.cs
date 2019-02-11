@@ -15,13 +15,15 @@ namespace CarForms
     public partial class Form1 : Form
     {
         List<Car> listCars = new List<Car>();
-        string currentFile;
+        string currentFile; //Name of the last saved file
 
         public Form1()
         {
             InitializeComponent();
             carBindingSource.DataSource = typeof(Car);
+            ShowInfo();
 
+            //Load or create a default XML file on startup
             string f = "default.xml";
             try
             {
@@ -32,8 +34,18 @@ namespace CarForms
                 saveXml(f);
             }
             currentFile = f;
-
         }
+
+        //Show current and total items
+        private void ShowInfo()
+        {
+            if (listCars.Count != 0)
+            {
+                lblCounter.Text = (carBindingSource.Position + 1).ToString() + " / " + carBindingSource.Count.ToString();
+            }
+            else lblCounter.Text = "None";
+        }
+
 
         public void Insert(Car c)
         {
@@ -43,12 +55,14 @@ namespace CarForms
                 carBindingSource.DataSource = listCars;
             }
             else listCars.Add(c);
+            ShowInfo();
         }
 
         //public MoveLast method for adding a car from an other form
         public void MoveLast()
         {
             carBindingSource.MoveLast();
+            ShowInfo();
         }
 
         //Getters and setters for interacting with other forms
@@ -69,24 +83,29 @@ namespace CarForms
 
         }
 
+        //Buttons for navigating through the list
         private void btnFirst_Click(object sender, EventArgs e)
         {
             carBindingSource.MoveFirst();
+            ShowInfo();
         }
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
             carBindingSource.MovePrevious();
+            ShowInfo();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
             carBindingSource.MoveNext();
+            ShowInfo();
         }
 
         private void btnLast_Click(object sender, EventArgs e)
         {
             carBindingSource.MoveLast();
+            ShowInfo();
         }
 
         //Form for adding a car
@@ -110,24 +129,29 @@ namespace CarForms
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             carBindingSource.RemoveCurrent();
+            if (listCars.Count == 0) carBindingSource.DataSource = typeof(Car);
+            else carBindingSource.DataSource = listCars;
+            ShowInfo();
         }
 
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             carBindingSource.Clear();
-            //carBindingSource.DataSource = listCars;
+            carBindingSource.DataSource = typeof(Car);
+            ShowInfo();
         }
 
+        //Generate sample data
         private void demoDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Insert(new Car("mark1", "maker1", "type1", 1, "date1"));
-            Insert(new Car("mark2", "maker2", "type2", 2, "date2"));
-            Insert(new Car("mark3", "maker3", "type3", 3, "date3"));
-            Insert(new Car("mark4", "maker4", "type4", 4, "date4"));
-            Insert(new Car("mark5", "maker5", "type5", 5, "date5"));
-            Insert(new Car("Ford", "Drof", "EcoSport", 1998, "07.08.2002"));
-            Insert(new Car("Ford", "Frod", "Fiesta", 2002, "23.11.2006"));
-            Insert(new Car("Ford", "Rofd", "Kuga", 2005, "18.02.2007"));
+            Insert(new Car("Toyota", "Toyota", "Highlander", 2019, "25.01.2019"));
+            Insert(new Car("Ferrari", "Ferrari", "360GT", 2002, "07.11.2004"));
+            Insert(new Car("BMW", "BMW", "i8", 2014, "11.12.2014"));
+            Insert(new Car("Tesla", "Tesla", "Model X", 2016, "05.02.2017"));
+            Insert(new Car("Nissan", "Nissan", "Micra", 2018, "06.08.2018"));
+            Insert(new Car("Ford", "Ford", "EcoSport", 2019, "15.01.2019"));
+            Insert(new Car("Ford", "Ford", "Fiesta", 2015, "23.11.2016"));
+            Insert(new Car("Ford", "Ford", "Focus", 1998, "18.02.1999"));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -135,6 +159,7 @@ namespace CarForms
             this.Close();
         }
 
+        //Open
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -147,6 +172,7 @@ namespace CarForms
             }
         }
 
+        //Save as
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -159,38 +185,80 @@ namespace CarForms
             }
         }
 
+        //Find cars matching the criteria and send them to the listbox form
         private void listToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //Form4 listForm = new Form4();
-            //listForm.carsForm = this;
-            //listForm.Show();
+            List<Car> filteredCars = new List<Car>();
+            foreach (Car c in listCars)
+            {
+                if (c.CarMark.ToUpper() == "FORD" && dateYear(c.RegistrationDate) >= 2000)
+                {
+                    filteredCars.Add(c);
+                }
+            }
+
+            this.Hide();
+            Form4 listForm = new Form4();
+            listForm.cars = filteredCars;
+            listForm.carsForm = this; //Make this form accessible from the new form
+            listForm.Show();
         }
 
         //Method to apply changes from another form after editing
         public void apply() { carBindingSource.EndEdit(); }
 
+        //Save
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             saveXml(currentFile);
         }
 
+        //Read list of cars from an XML file
         private void openXml(string fileName)
         {
             using (var reader = new StreamReader(fileName))
             {
                 XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
                 listCars = (List<Car>)xmlser.Deserialize(reader);
-                carBindingSource.DataSource = listCars;
+                if (listCars.Count == 0) carBindingSource.DataSource = typeof(Car);
+                else carBindingSource.DataSource = listCars;
             }
+            ShowInfo();
         }
 
+        //Save list of cars as into XML format
         private void saveXml(string fileName)
         {
             using (FileStream writer = new FileStream(fileName, FileMode.Create))
             {
                 XmlSerializer xmlser = new XmlSerializer(typeof(List<Car>));
                 xmlser.Serialize(writer, listCars);
+            }
+        }
+
+        //Find the year from a date string by looking for the longest number
+        private int? dateYear(string date)
+        {
+            string[] parts = date.Split('/', '.', '-');
+            int j = 0;
+            int length = 0;
+            for (int i = 0; i<parts.Length; i++)
+            {
+                if (parts[i].Length > length)
+                {
+                    j = i;
+                    length = parts[i].Length;
+                }
+            }
+
+            try
+            {
+                int year = int.Parse(parts[j]);
+                return year;
+            }
+            catch(Exception e)
+            {
+                return null;
             }
         }
     }

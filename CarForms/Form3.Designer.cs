@@ -159,8 +159,10 @@
             this.Controls.Add(this.tbReleaseYear);
             this.Controls.Add(this.tbRegistrationDate);
             this.Controls.Add(this.tbCarMark);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Edit a car";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

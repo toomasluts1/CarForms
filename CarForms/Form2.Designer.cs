@@ -103,6 +103,7 @@
             // 
             // tbReleaseYear
             // 
+            this.tbReleaseYear.BackColor = System.Drawing.SystemColors.Window;
             this.tbReleaseYear.Location = new System.Drawing.Point(127, 90);
             this.tbReleaseYear.Name = "tbReleaseYear";
             this.tbReleaseYear.Size = new System.Drawing.Size(337, 20);
@@ -159,6 +160,8 @@
             this.Controls.Add(this.tbReleaseYear);
             this.Controls.Add(this.tbRegistrationDate);
             this.Controls.Add(this.tbCarMark);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form2";
             this.Text = "Add car";
             this.Load += new System.EventHandler(this.Form2_Load);

@@ -58,6 +58,7 @@
             this.demoDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lblCounter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.carBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -305,11 +306,21 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // lblCounter
+            // 
+            this.lblCounter.AutoSize = true;
+            this.lblCounter.Location = new System.Drawing.Point(12, 189);
+            this.lblCounter.Name = "lblCounter";
+            this.lblCounter.Size = new System.Drawing.Size(36, 13);
+            this.lblCounter.TabIndex = 15;
+            this.lblCounter.Text = "Empty";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(476, 215);
+            this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrev);
@@ -325,7 +336,9 @@
             this.Controls.Add(this.tbRegistrationDate);
             this.Controls.Add(this.tbCarMark);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Cars";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -368,6 +381,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem listToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
+        private System.Windows.Forms.Label lblCounter;
     }
 }
 

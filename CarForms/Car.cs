@@ -25,6 +25,9 @@ namespace CarForms
             this.registrationDate = registrationDate;
         }
 
+        // Property with description for listbox
+        public string Description => $"{carMark} {type}, Released: {releaseYear}, Registered: {registrationDate}";
+
         public string CarMark { get => carMark; set => carMark = value; }
         public string Maker { get => maker; set => maker = value; }
         public string Type { get => type; set => type = value; }

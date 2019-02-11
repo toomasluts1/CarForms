@@ -22,4 +22,5 @@ D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csproj.GenerateResource
 D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.exe
 D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.pdb
+D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.Form4.resources
 D:\Documents\GitHub\CarForms\CarForms\obj\Debug\CarForms.csprojAssemblyReference.cache
